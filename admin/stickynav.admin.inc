@@ -5,7 +5,8 @@
  */
 
 /**
- * Admin form to set up the sticky nav logic
+ * Admin form to set up the sticky nav logic.
+ *
  * @param $form
  * @param $form_state
  */
@@ -13,14 +14,14 @@ function stickynav_admin_form($form, $form_state) {
   $form = array();
   $themes = list_themes();
   foreach ($themes as $name => $data) {
-    //only getting settings for enabled themes
+    // Only getting settings for enabled themes.
     if ($data->status == 1) {
       $form['stickynav-enabled-' . $name] = array(
         '#type' => 'checkbox',
         '#title' => check_plain($data->info['name']),
         '#default_value' => variable_get('stickynav-enabled-' . $name, FALSE),
       );
-      //selector is only visible when you activate sticky nav for the theme
+      // Selector is only visible when you activate sticky nav for the theme.
       $form['stickynav-selector-' . $name] = array(
         '#type' => 'textfield',
         '#title' => t('Selector'),
