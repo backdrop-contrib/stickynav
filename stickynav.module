@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_menu().
+ * Implements hook_init().
  */
 function stickynav_init() {
   global $theme;
@@ -26,7 +26,7 @@ function stickynav_init() {
 }
 
 /**
- * Implementation of hook_menu()
+ * Implements hook_menu().
  */
 function stickynav_menu() {
   $items['admin/config/user-interface/stickynav'] = array(
