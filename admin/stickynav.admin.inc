@@ -6,11 +6,8 @@
 
 /**
  * Admin form to set up the sticky nav logic.
- *
- * @param array $form
- * @param array $form_state
  */
-function stickynav_admin_form($form, $form_state) {
+function stickynav_admin_form() {
   $form = array();
   $themes = list_themes();
   foreach ($themes as $name => $data) {
