@@ -7,8 +7,8 @@
 /**
  * Admin form to set up the sticky nav logic.
  *
- * @param $form
- * @param $form_state
+ * @param array $form
+ * @param array $form_state
  */
 function stickynav_admin_form($form, $form_state) {
   $form = array();
