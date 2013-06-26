@@ -13,6 +13,8 @@ folder in your Drupal installation.
 
 4) Activate the themes you want a sticky navigation on
 
-5) Place a jquery format selector into the Selector field for each activated theme
+5) Place a jquery format selector into the Selector field for each activated
+theme
 
-6) This may not look good on every theme. You might have to adjust the styling to make it look good.
+6) This may not look good on every theme. You might have to adjust the styling
+to make it look good.

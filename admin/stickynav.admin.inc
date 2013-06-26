@@ -1,41 +1,41 @@
 <?php
-  /**
-   * @file
-   * Contains implementation of admin settings form for the sticky navigation
-   */
+/**
+ * @file
+ * Contains implementation of admin settings form for the sticky navigation
+ */
 
-  /**
-   * Admin form to set up the sticky nav logic
-   * @param $form
-   * @param $form_state
-   */
-  function stickynav_admin_form($form, $form_state) {
-    $form = array();
-    $themes = list_themes();
-    foreach ($themes as $name => $data) {
-      //only getting settings for enabled themes
-      if ($data->status == 1) {
-        $form['stickynav-enabled-' . $name] = array(
-          '#type' => 'checkbox',
-          '#title' => check_plain($data->info['name']),
-          '#default_value' => variable_get('stickynav-enabled-' . $name, FALSE),
-        );
-        //selector is only visible when you activate sticky nav for the theme
-        $form['stickynav-selector-' . $name] = array(
-          '#type' => 'textfield',
-          '#title' => t('Selector'),
-          '#description' => t('Place your selector for your menu that will be sticky on your theme. Use jquery format.'),
-          '#default_value' => variable_get('stickynav-selector-' . $name, ''),
-          '#states' => array(
-            'visible' => array(
-              ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => TRUE),
-            ),
-            'invisible' => array(
-              ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => FALSE),
-            ),
+/**
+ * Admin form to set up the sticky nav logic
+ * @param $form
+ * @param $form_state
+ */
+function stickynav_admin_form($form, $form_state) {
+  $form = array();
+  $themes = list_themes();
+  foreach ($themes as $name => $data) {
+    //only getting settings for enabled themes
+    if ($data->status == 1) {
+      $form['stickynav-enabled-' . $name] = array(
+        '#type' => 'checkbox',
+        '#title' => check_plain($data->info['name']),
+        '#default_value' => variable_get('stickynav-enabled-' . $name, FALSE),
+      );
+      //selector is only visible when you activate sticky nav for the theme
+      $form['stickynav-selector-' . $name] = array(
+        '#type' => 'textfield',
+        '#title' => t('Selector'),
+        '#description' => t('Place your selector for your menu that will be sticky on your theme. Use jquery format.'),
+        '#default_value' => variable_get('stickynav-selector-' . $name, ''),
+        '#states' => array(
+          'visible' => array(
+            ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => TRUE),
           ),
-        );
-      }
+          'invisible' => array(
+            ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => FALSE),
+          ),
+        ),
+      );
     }
-    return system_settings_form($form);
   }
+  return system_settings_form($form);
+}

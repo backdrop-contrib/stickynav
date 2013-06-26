@@ -1,40 +1,42 @@
 <?php
-  /**
-   * @file
-   * Make a menu or some other element on the page stick on top when you scroll down
-   */
+/**
+ * @file
+ * Make a menu or some other element on the page stick on top when you scroll down
+ */
 
-  /**
-   * Implementation of hook_menu()
-   */
-  function stickynav_init() {
-    global $theme;
-    $selector = variable_get('stickynav-selector-' . $theme, '');
-    // will only add the sticky nav assets if the theme and selector are set
-    if (variable_get('stickynav-enabled-' . $theme, FALSE) && trim($selector)) {
-      drupal_add_css(drupal_get_path('module', 'stickynav') . '/css/stickynav.css');
-      drupal_add_js(drupal_get_path('module', 'stickynav') . '/js/stickynav.js');
-      $settings = array(
-        'stickynav' => array(
-          'selector' => $selector
-        )
-      );
-      drupal_add_js($settings, 'setting');
-    }
-  }
-
-  /**
-   * Implementation of hook_menu()
-   */
-  function stickynav_menu() {
-    $items['admin/config/user-interface/stickynav'] = array(
-      'title' => 'Sticky Nav Settings',
-      'description' => 'Configure the settings of sticky navigation on your website',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('stickynav_admin_form'),
-      'access callback' => 'user_access',
-      'access arguments' => array('administer statzone'),
-      'file' => 'admin/stickynav.admin.inc',
+/**
+ * Implementation of hook_menu()
+ */
+function stickynav_init() {
+  global $theme;
+  $selector = variable_get('stickynav-selector-' . $theme, '');
+  // will only add the sticky nav assets if the theme and selector are set
+  if (variable_get('stickynav-enabled-' . $theme, FALSE) && trim($selector)) {
+    drupal_add_css(drupal_get_path('module', 'stickynav') .
+      '/css/stickynav.css');
+    drupal_add_js(drupal_get_path('module', 'stickynav') . '/js/stickynav.js');
+    $settings = array(
+      'stickynav' => array(
+        'selector' => $selector
+      )
     );
-    return $items;
+    drupal_add_js($settings, 'setting');
   }
+}
+
+/**
+ * Implementation of hook_menu()
+ */
+function stickynav_menu() {
+  $items['admin/config/user-interface/stickynav'] = array(
+    'title' => 'Sticky Nav Settings',
+    'description' => 'Configure the settings of sticky navigation on your
+    website',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('stickynav_admin_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer statzone'),
+    'file' => 'admin/stickynav.admin.inc',
+  );
+  return $items;
+}
