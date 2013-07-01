@@ -26,6 +26,18 @@ function stickynav_init() {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function stickynav_permission() {
+  return array(
+    'administer stickynav' => array(
+      'title' => t('Administer Sticky Nav'),
+      'description' => t('Permission to activate and manage Sticky Nav.'),
+    ),
+  );
+}
+
+/**
  * Implements hook_menu().
  */
 function stickynav_menu() {
