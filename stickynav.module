@@ -47,7 +47,7 @@ function stickynav_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('stickynav_admin_form'),
     'access callback' => 'user_access',
-    'access arguments' => array('administer statzone'),
+    'access arguments' => array('administer stickynav'),
     'file' => 'admin/stickynav.admin.inc',
   );
   return $items;
