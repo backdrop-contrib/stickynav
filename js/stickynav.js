@@ -10,7 +10,6 @@
         var compensation = menu.outerHeight();
         //attaching a scroll event
         $(window).scroll(function () {
-          console.log(1);
           if ($(window).scrollTop() > breakpoint) {
             menu.addClass('stickynav-active');
             $('body').css('padding-top', compensation);
