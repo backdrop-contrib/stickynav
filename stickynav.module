@@ -18,7 +18,7 @@ function stickynav_init() {
     drupal_add_js(drupal_get_path('module', 'stickynav') . '/js/stickynav.js');
     $settings = array(
       'stickynav' => array(
-        'selector' => $selector,
+        'selector' => check_plain($selector),
       ),
     );
     drupal_add_js($settings, 'setting');
