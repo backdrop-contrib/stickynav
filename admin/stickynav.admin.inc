@@ -35,5 +35,17 @@ function stickynav_admin_form() {
       );
     }
   }
+
+  $form['stickynav-permissions'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable permissions'),
+    '#description' => t('If selected the sticky navigation will be restricted by permissions for each role. You can set
+    this in the !link.',
+      array(
+        '!link' => l(t('permissions section'), 'admin/people/permissions'),
+      )
+    ),
+    '#default_value' => variable_get('stickynav-permissions', FALSE),
+  );
   return system_settings_form($form);
 }
