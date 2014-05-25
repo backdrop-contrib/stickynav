@@ -33,19 +33,23 @@ function stickynav_admin_form() {
           ),
         ),
       );
+      $form['stickynav-roles-' . $name] = array(
+        '#type' => 'checkboxes',
+        '#title' => t('Excluded Roles'),
+        '#description' => t("Exclude specific roles from using sticky navigation."),
+        '#options' => user_roles(),
+        '#default_value' => variable_get('stickynav-roles-' . $name, array()),
+        '#states' => array(
+          'visible' => array(
+            ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => TRUE),
+          ),
+          'invisible' => array(
+            ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => FALSE),
+          ),
+        ),
+      );
     }
   }
 
-  $form['stickynav-permissions'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable permissions'),
-    '#description' => t('If selected the sticky navigation will be restricted by permissions for each role. You can set
-    this in the !link.',
-      array(
-        '!link' => l(t('permissions section'), 'admin/people/permissions'),
-      )
-    ),
-    '#default_value' => variable_get('stickynav-permissions', FALSE),
-  );
   return system_settings_form($form);
 }

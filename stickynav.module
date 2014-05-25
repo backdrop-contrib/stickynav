@@ -9,14 +9,12 @@
  * Implements hook_init().
  */
 function stickynav_init() {
-  /*
-  Check if permissions are enabled and if the user has the
-  permission to use sticky navigation.
-  */
-  if (variable_get('stickynav-permissions', FALSE) && !user_access('use stickynav')) {
+  global $user, $theme;
+  // Check if user has an exclusion role.
+  $excluded_roles = array_filter(variable_get('stickynav-roles-' . $theme, array()));
+  if (array_intersect_key($excluded_roles, $user->roles)) {
     return;
   }
-  global $theme;
   $selector = variable_get('stickynav-selector-' . $theme, '');
   // Will only add the sticky nav assets if the theme and selector are set.
   if (variable_get('stickynav-enabled-' . $theme, FALSE) && trim($selector)) {
@@ -40,10 +38,6 @@ function stickynav_permission() {
     'administer stickynav' => array(
       'title' => t('Administer Sticky Nav'),
       'description' => t('Permission to activate and manage Sticky Nav.'),
-    ),
-    'use stickynav' => array(
-      'title' => t('Use Sticky Nav'),
-      'description' => t('Permission to use the sticky navigation.'),
     ),
   );
 }
