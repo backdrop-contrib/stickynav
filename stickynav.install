@@ -10,7 +10,8 @@
 function stickynav_uninstall() {
   $or = db_or()
     ->condition('name', 'stickynav-enabled-%', 'LIKE')
-    ->condition('name', 'stickynav-selector-%', 'LIKE');
+    ->condition('name', 'stickynav-selector-%', 'LIKE')
+    ->condition('name', 'stickynav-roles-%', 'LIKE');
   $result = db_select('variable', 'v')
     ->fields('v', array('name'))
     ->condition($or)
@@ -18,5 +19,4 @@ function stickynav_uninstall() {
   foreach ($result as $row) {
     variable_del($row->name);
   }
-  variable_del('stickynav-permissions');
 }

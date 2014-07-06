@@ -7,7 +7,7 @@
       var breakpoint = null;
       if (menu.length) {
         //only set breakpoint once so that it doesn't reset in a behavior attach happens.
-        if (breakpoint) {
+        if (breakpoint === null) {
           breakpoint = menu.offset().top;
         }
         //we need to compensate the element so that the content does not jump up
