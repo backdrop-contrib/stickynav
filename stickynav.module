@@ -16,6 +16,8 @@ function stickynav_init() {
     return;
   }
   $selector = variable_get('stickynav-selector-' . $theme, '');
+  $offset_selector = variable_get('stickynav-offset-selector-' . $theme, '');
+  $custom_offset = variable_get('stickynav-custom-offset-' . $theme, '');
   // Will only add the sticky nav assets if the theme and selector are set.
   if (variable_get('stickynav-enabled-' . $theme, FALSE) && trim($selector)) {
     drupal_add_css(drupal_get_path('module', 'stickynav') .
@@ -24,6 +26,10 @@ function stickynav_init() {
     $settings = array(
       'stickynav' => array(
         'selector' => check_plain($selector),
+        'offsets' => array(
+          'selector' => check_plain($offset_selector),
+          'custom_offset' => check_plain($custom_offset),
+        ),
       ),
     );
     drupal_add_js($settings, 'setting');
