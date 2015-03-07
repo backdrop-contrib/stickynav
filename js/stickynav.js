@@ -15,6 +15,7 @@
             Drupal.behaviors.stickynav.originalPadding = $('body').css('paddingTop');
           }, 0);
           offset += parseInt(Drupal.settings.stickynav.offsets.custom_offset);
+          offset = offset || 0;
           $(Drupal.settings.stickynav.offsets.selector).each(function() {
             offset += $(this).outerHeight();
           });
