@@ -9,6 +9,7 @@
  */
 function stickynav_admin_form() {
   $form = array();
+  $config = config('stickynav.settings');
   $themes = list_themes();
   foreach ($themes as $name => $data) {
     // Only getting settings for enabled themes.
@@ -16,14 +17,14 @@ function stickynav_admin_form() {
       $form['stickynav-enabled-' . $name] = array(
         '#type' => 'checkbox',
         '#title' => check_plain($data->info['name']),
-        '#default_value' => variable_get('stickynav-enabled-' . $name, FALSE),
+        '#default_value' => $config->get('stickynav-enabled-' . $name),
       );
       // Selector is only visible when you activate sticky nav for the theme.
       $form['stickynav-selector-' . $name] = array(
         '#type' => 'textfield',
         '#title' => t('Selector'),
         '#description' => t('Place your selector for your menu that will be sticky on your theme. Use jquery format.'),
-        '#default_value' => variable_get('stickynav-selector-' . $name, ''),
+        '#default_value' => $config->get('stickynav-selector-' . $name),
         '#states' => array(
           'visible' => array(
             ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => TRUE),
@@ -38,7 +39,7 @@ function stickynav_admin_form() {
         '#title' => t('Excluded Roles'),
         '#description' => t("Exclude specific roles from using sticky navigation."),
         '#options' => user_roles(),
-        '#default_value' => variable_get('stickynav-roles-' . $name, array()),
+        '#default_value' => $config->get('stickynav-roles-' . $name),
         '#states' => array(
           'visible' => array(
             ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => TRUE),
@@ -49,8 +50,8 @@ function stickynav_admin_form() {
         ),
       );
       // Offset settings.
-      $offset_selector = variable_get('stickynav-offset-selector-' . $name, '');
-      $custom_offset = variable_get('stickynav-custom-offset-' . $name, '');
+      $offset_selector = $config->get('stickynav-offset-selector-' . $name);
+      $custom_offset = $config->get('stickynav-custom-offset-' . $name);
       $form['stickynav-offsets-' . $name] = array(
         '#type' => 'fieldset',
         '#title' => t('Offsets'),
@@ -81,7 +82,13 @@ function stickynav_admin_form() {
     }
   }
 
-  return system_settings_form($form);
+  $form['actions']['#type'] = 'actions';
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save configuration'),
+  );
+  
+  return $form;
 }
 
 /**
@@ -95,4 +102,24 @@ function stickynav_admin_form_validate($form, &$form_state) {
       form_set_error($name, t('The custom offset value has to be a number.'));
     }
   }
+}
+
+/**
+ * Submit handler for stickynav_admin_form().
+ */
+function stickynav_admin_form_submit($form, &$form_state) {
+  $config = config('stickynav.settings');
+  $values = $form_state['values'];
+  $themes = list_themes();
+  foreach ($themes as $name => $data) {
+    if ($data->status == 1) {
+      $config->set('stickynav-enabled-' . $name, $values['stickynav-enabled-' . $name]);
+      $config->set('stickynav-selector-' . $name, $values['stickynav-selector-' . $name]);
+      $config->set('stickynav-roles-' . $name, $values['stickynav-roles-' . $name]);
+      $config->set('stickynav-offset-selector-' . $name, $values['stickynav-offset-selector-' . $name]);
+      $config->set('stickynav-custom-offset-' . $name, $values['stickynav-custom-offset-' . $name]);
+      $config->save();
+    }
+  }
+  backdrop_set_message(t('Sticky Navigation settings have been saved.'));
 }

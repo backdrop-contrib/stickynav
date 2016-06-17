@@ -1,0 +1,22 @@
+{
+    "_config_name": "stickynav.settings",
+    "stickynav-enabled-bartik": 0,
+    "stickynav-enabled-seven": 0,
+    "stickynav-enabled-stark": null,
+    "stickynav-selector-bartik": "",
+    "stickynav-roles-bartik": {
+        "anonymous": 0,
+        "authenticated": 0,
+        "administrator": 0
+    },
+    "stickynav-offset-selector-bartik": "",
+    "stickynav-custom-offset-bartik": "",
+    "stickynav-selector-seven": "",
+    "stickynav-roles-seven": {
+        "anonymous": 0,
+        "authenticated": 0,
+        "administrator": 0
+    },
+    "stickynav-offset-selector-seven": "",
+    "stickynav-custom-offset-seven": ""
+}

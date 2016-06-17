@@ -11,18 +11,18 @@
 function stickynav_init() {
   global $user, $theme;
   // Check if user has an exclusion role.
-  $excluded_roles = array_filter(variable_get('stickynav-roles-' . $theme, array()));
-  if (array_intersect_key($excluded_roles, $user->roles)) {
+  $excluded_roles = config_get('stickynav.settings', 'stickynav-roles-' . $theme);
+  if (isset($excluded_roles) && array_intersect_key($excluded_roles, $user->roles)) {
     return;
   }
-  $selector = variable_get('stickynav-selector-' . $theme, '');
-  $offset_selector = variable_get('stickynav-offset-selector-' . $theme, '');
-  $custom_offset = variable_get('stickynav-custom-offset-' . $theme, '');
+  $selector = config_get('stickynav.settings', 'stickynav-selector-' . $theme);
+  $offset_selector = config_get('stickynav.settings', 'stickynav-offset-selector-' . $theme);
+  $custom_offset = config_get('stickynav.settings', 'stickynav-custom-offset' . $theme);
   // Will only add the sticky nav assets if the theme and selector are set.
-  if (variable_get('stickynav-enabled-' . $theme, FALSE) && trim($selector)) {
-    drupal_add_css(drupal_get_path('module', 'stickynav') .
+  if (config_get('stickynav.settings', 'stickynav-enabled-' . $theme) && trim($selector)) {
+    backdrop_add_css(backdrop_get_path('module', 'stickynav') .
       '/css/stickynav.css');
-    drupal_add_js(drupal_get_path('module', 'stickynav') . '/js/stickynav.js');
+    backdrop_add_js(backdrop_get_path('module', 'stickynav') . '/js/stickynav.js');
     $settings = array(
       'stickynav' => array(
         'selector' => check_plain($selector),
@@ -32,7 +32,7 @@ function stickynav_init() {
         ),
       ),
     );
-    drupal_add_js($settings, 'setting');
+    backdrop_add_js($settings, 'setting');
   }
 }
 
@@ -55,11 +55,22 @@ function stickynav_menu() {
   $items['admin/config/user-interface/stickynav'] = array(
     'title' => 'Sticky Nav Settings',
     'description' => 'Settings of sticky navigation on your website',
-    'page callback' => 'drupal_get_form',
+    'page callback' => 'backdrop_get_form',
     'page arguments' => array('stickynav_admin_form'),
     'access callback' => 'user_access',
     'access arguments' => array('administer stickynav'),
-    'file' => 'admin/stickynav.admin.inc',
+    'file' => 'stickynav.admin.inc',
   );
   return $items;
+}
+
+/**
+  * Implements hook_config_info().
+  */
+function stickynav_config_info() {
+  $prefixes['stickynav.settings'] = array(
+    'label' => t('Sticky Navigation settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
 }
