@@ -22,7 +22,7 @@ element you've selected to make sticky).
 
 ## Current Maintainers
 
-- Laryn Kragt Bakker (CEDC.org) (https://github.com/laryn)
+- Laryn Kragt Bakker - CEDC.org (https://github.com/laryn)
 - Mihhail Arhipov - DMT team (https://github.com/skein)
 
 ## Credits
