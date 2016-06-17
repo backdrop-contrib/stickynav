@@ -32,5 +32,5 @@ element you've selected to make sticky).
 
 ## License
 
-This project is GPL v2 software. See the LICENSE.txt file in this directory for
+This project is GPL v2 software. See the [LICENSE.txt](LICENSE.txt) file in this directory for
 complete text.
