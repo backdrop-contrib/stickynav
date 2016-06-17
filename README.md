@@ -20,9 +20,17 @@ Note that this functionality may not look good on every theme out of the box.
 You might have to adjust the styling (such as the background color of the 
 element you've selected to make sticky).
 
+## Current Maintainers
 
-> Sticky Navigation was originally created for Haymarket Media Group by DMT team
+- Laryn Kragt Bakker (CEDC.org) (https://github.com/laryn)
+- Mihhail Arhipov - DMT team (https://github.com/skein)
 
-> Developer: Mihhail Arhipov (drupal.org id: skein)
+## Credits
 
-> Backdrop port: Laryn Kragt Bakker for CEDC.org (github id: laryn)
+- Ported to Backdrop CMS by Laryn Kragt Bakker - CEDC.org (https://github.com/laryn).
+- Originally written for Drupal by Mihhail Arhipov - DMT team (https://github.com/skein) for Haymarket Media Group.
+
+## License
+
+This project is GPL v2 software. See the LICENSE.txt file in this directory for
+complete text.
