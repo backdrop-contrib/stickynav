@@ -10,6 +10,7 @@
  */
 function stickynav_init() {
   global $user, $theme;
+  $config = config('stickynav.settings');
   // Check if user has an exclusion role.
   $excluded_roles = $config->get('stickynav-roles-' . $theme);
   if (isset($excluded_roles) && array_intersect_key($excluded_roles, $user->roles)) {
