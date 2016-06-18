@@ -11,15 +11,15 @@
 function stickynav_init() {
   global $user, $theme;
   // Check if user has an exclusion role.
-  $excluded_roles = config_get('stickynav.settings', 'stickynav-roles-' . $theme);
+  $excluded_roles = $config->get('stickynav-roles-' . $theme);
   if (isset($excluded_roles) && array_intersect_key($excluded_roles, $user->roles)) {
     return;
   }
-  $selector = config_get('stickynav.settings', 'stickynav-selector-' . $theme);
-  $offset_selector = config_get('stickynav.settings', 'stickynav-offset-selector-' . $theme);
-  $custom_offset = config_get('stickynav.settings', 'stickynav-custom-offset' . $theme);
+  $selector = $config->get('stickynav-selector-' . $theme);
+  $offset_selector = $config->get('stickynav-offset-selector-' . $theme);
+  $custom_offset = $config->get('stickynav-custom-offset' . $theme);
   // Will only add the sticky nav assets if the theme and selector are set.
-  if (config_get('stickynav.settings', 'stickynav-enabled-' . $theme) && trim($selector)) {
+  if ($config->get('stickynav-enabled-' . $theme) && trim($selector)) {
     backdrop_add_css(backdrop_get_path('module', 'stickynav') .
       '/css/stickynav.css');
     backdrop_add_js(backdrop_get_path('module', 'stickynav') . '/js/stickynav.js');
