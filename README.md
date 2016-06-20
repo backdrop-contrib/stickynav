@@ -8,7 +8,9 @@ is scrolled.
 
 1. Copy this module's directory into the **/modules** folder in your 
    Backdrop installation.
-2. Enable the module in the **Functionality** page (`admin/modules/list`).
+2. Enable the module in the **Functionality** page (`admin/modules/list`) or
+   via the Project Installer. [See the official Backdrop CMS instructions
+   for more detail on the install process](https://backdropcms.org/guide/modules).
 3. Go to **Configuration > User Interface > Sticky Nav Settings** 
    (`admin/config/user-interface/stickynav`) to configure.
 4. Activate the module for the themes you want Sticky Navigation to 
