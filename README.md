@@ -24,13 +24,13 @@ element you've selected to make sticky).
 
 ## Current Maintainers
 
-- Laryn Kragt Bakker - CEDC.org (https://github.com/laryn)
-- Mihhail Arhipov - DMT team (https://github.com/skein)
+- [Laryn Kragt Bakker](https://github.com/laryn) - [CEDC.org](https://cedc.org)
+- [Mihhail Arhipov](https://github.com/skein) - DMT team 
 
 ## Credits
 
-- Ported to Backdrop CMS by Laryn Kragt Bakker - CEDC.org (https://github.com/laryn).
-- Originally written for Drupal by Mihhail Arhipov - DMT team (https://github.com/skein) for Haymarket Media Group.
+- Ported to Backdrop CMS by [Laryn Kragt Bakker](https://github.com/laryn) - [CEDC.org](https://cedc.org).
+- Originally written for Drupal by [Mihhail Arhipov](https://github.com/skein) - DMT team for Haymarket Media Group.
 
 ## License
 
