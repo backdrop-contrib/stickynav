@@ -23,7 +23,7 @@ function stickynav_admin_form() {
       $form['stickynav-selector-' . $name] = array(
         '#type' => 'textfield',
         '#title' => t('Selector'),
-        '#description' => t('Place your selector for your menu that will be sticky on your theme. Use jquery format.'),
+        '#description' => t('Place your selector for your menu that will be sticky on your theme. Use jQuery format (e.g. <strong>.l-header</strong>).'),
         '#default_value' => $config->get('stickynav-selector-' . $name),
         '#states' => array(
           'visible' => array(
@@ -70,14 +70,16 @@ function stickynav_admin_form() {
       $form['stickynav-offsets-' . $name]['stickynav-offset-selector-' . $name] = array(
         '#type' => 'textfield',
         '#title' => t('Selector'),
-        '#description' => t('Element to use as an offset. For multiple elements on the page separate them with a comma. Use jquery format.'),
+        '#description' => t('Element to use as an offset. For multiple elements on the page separate them with a comma. Use jQuery format (e.g. <strong>.admin-bar</strong>).'),
         '#default_value' => $offset_selector,
       );
       $form['stickynav-offsets-' . $name]['stickynav-custom-offset-' . $name] = array(
-        '#type' => 'textfield',
+        '#type' => 'number',
         '#title' => t('Custom offset'),
-        '#description' => t('Custom offset in pixels. This will be added to the elements offsets if they are set.'),
+        '#description' => t('Custom offset (in pixels). This will be added to the elements offsets if they are set.'),
         '#default_value' => $custom_offset,
+        '#min' => 0,
+        '#step' => 1,
       );
     }
   }
