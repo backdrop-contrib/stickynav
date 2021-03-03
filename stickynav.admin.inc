@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains implementation of admin settings form for the sticky navigation
+ * Contains implementation of admin settings form for the sticky navigation.
  */
 
 /**
@@ -49,6 +49,30 @@ function stickynav_admin_form() {
           ),
         ),
       );
+      // Path include/exclude fields.
+      $form['paths'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Path visibility'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#weight' => 20,
+      );
+      $form['paths']['pathvisibility'] = array(
+        '#type' => 'radios',
+        '#title' => t('Activate on specific paths'),
+        '#options' => array(
+          0 => t('All paths except those listed'),
+          1 => t('Only the listed paths'),
+        ),
+        '#default_value' => $config->get('pathvisibility'),
+      );
+      $form['paths']['paths'] = array(
+        '#type' => 'textarea',
+        '#title' => t('List of paths to activate'),
+        '#description' => t("Specify paths, one path per line. The '*' character is a wildcard. %front is the front page.", array('%front' => '<front>')),
+        '#default_value' => $config->get('paths'),
+      );
+
       // Offset settings.
       $offset_selector = $config->get('stickynav-offset-selector-' . $name);
       $custom_offset = $config->get('stickynav-custom-offset-' . $name);
@@ -66,6 +90,7 @@ function stickynav_admin_form() {
             ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => FALSE),
           ),
         ),
+        '#weight' => 21,
       );
       $form['stickynav-offsets-' . $name]['stickynav-offset-selector-' . $name] = array(
         '#type' => 'textfield',
@@ -119,6 +144,8 @@ function stickynav_admin_form_submit($form, &$form_state) {
       $config->set('stickynav-selector-' . $name, $values['stickynav-selector-' . $name]);
       $config->set('stickynav-roles-' . $name, $values['stickynav-roles-' . $name]);
       $config->set('stickynav-offset-selector-' . $name, $values['stickynav-offset-selector-' . $name]);
+      $config->set('paths', $values['paths']);
+      $config->set('pathvisibility', $values['pathvisibility']);
       $config->set('stickynav-custom-offset-' . $name, $values['stickynav-custom-offset-' . $name]);
       $config->save();
     }

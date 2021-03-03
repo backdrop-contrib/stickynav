@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Make a menu or some other element on the page stick on top when you scroll
+ * Make a menu or some other element on the page stick on top when you scroll.
  * down
  */
 
@@ -11,11 +11,19 @@
 function stickynav_init() {
   global $user, $theme;
   $config = config('stickynav.settings');
+
   // Check if user has an exclusion role.
   $excluded_roles = $config->get('stickynav-roles-' . $theme);
   if (isset($excluded_roles) && array_intersect($excluded_roles, $user->roles)) {
     return;
   }
+
+  // Check if the library should be loaded on the current path and theme.
+  $show_on_path = stickynav_check_path($config->get('pathvisibility'), $config->get('paths'));
+  if (!$show_on_path) {
+    return;
+  }
+
   $selector = $config->get('stickynav-selector-' . $theme);
   $offset_selector = $config->get('stickynav-offset-selector-' . $theme);
   $custom_offset = $config->get('stickynav-custom-offset' . $theme);
@@ -74,4 +82,24 @@ function stickynav_config_info() {
     'group' => t('Configuration'),
   );
   return $prefixes;
+}
+
+/**
+ * Check if the library should be loaded on the current page.
+ *
+ * @see https://api.backdropcms.org/api/backdrop/core%21modules%21layout%21plugins%21access%21path_layout_access.inc/function/PathLayoutAccess%3A%3AcheckAccess/1
+ */
+function stickynav_check_path($visibility, $pages) {
+  $base_path = $_GET['q'];
+  $path = backdrop_get_path_alias($base_path);
+  $page_match = backdrop_match_path($path, $pages);
+
+  if ($path !== $base_path) {
+    $page_match = $page_match || backdrop_match_path($base_path, $pages);
+  }
+
+  if (!$visibility) {
+    $page_match = !$page_match;
+  }
+  return $page_match;
 }
