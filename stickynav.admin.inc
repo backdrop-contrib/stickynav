@@ -70,7 +70,7 @@ function stickynav_admin_form() {
       $form['theme-settings']['theme-settings-' . $name]['stickynav-offsets-' . $name]['stickynav-offset-selector-' . $name] = array(
         '#type' => 'textfield',
         '#title' => t('Selector'),
-        '#description' => t('Element to use as an offset. For multiple elements on the page separate them with a comma. Use jQuery format (e.g. <strong>.admin-bar</strong>).'),
+        '#description' => t('Element to use as an offset. For multiple elements on the page separate them with a comma. Use jQuery format (e.g. <strong>#admin-bar</strong>).'),
         '#default_value' => $offset_selector,
       );
       $form['theme-settings']['theme-settings-' . $name]['stickynav-offsets-' . $name]['stickynav-custom-offset-' . $name] = array(
