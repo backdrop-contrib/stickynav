@@ -62,8 +62,8 @@ function stickynav_permission() {
  */
 function stickynav_menu() {
   $items['admin/config/user-interface/stickynav'] = array(
-    'title' => 'Sticky Nav Settings',
-    'description' => 'Settings of sticky navigation on your website',
+    'title' => 'Sticky Nav',
+    'description' => 'Settings for sticky navigation on your website',
     'page callback' => 'backdrop_get_form',
     'page arguments' => array('stickynav_admin_form'),
     'access callback' => 'user_access',
@@ -78,7 +78,7 @@ function stickynav_menu() {
   */
 function stickynav_config_info() {
   $prefixes['stickynav.settings'] = array(
-    'label' => t('Sticky Navigation settings'),
+    'label' => t('Sticky Nav'),
     'group' => t('Configuration'),
   );
   return $prefixes;
