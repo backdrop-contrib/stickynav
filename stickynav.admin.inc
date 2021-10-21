@@ -34,12 +34,13 @@ function stickynav_admin_form() {
           ),
         ),
       );
+      $exclude_role_default = (empty($config->get('stickynav-roles-' . $name))) ? array() : $config->get('stickynav-roles-' . $name);
       $form['stickynav-roles-' . $name] = array(
         '#type' => 'checkboxes',
         '#title' => t('Excluded Roles'),
         '#description' => t("Exclude specific roles from using sticky navigation."),
         '#options' => user_roles(),
-        '#default_value' => $config->get('stickynav-roles-' . $name),
+        '#default_value' => $exclude_role_default,
         '#states' => array(
           'visible' => array(
             ':input[name="stickynav-enabled-' . $name . '"]' => array('checked' => TRUE),
@@ -114,7 +115,7 @@ function stickynav_admin_form() {
     '#type' => 'submit',
     '#value' => t('Save configuration'),
   );
-  
+
   return $form;
 }
 
