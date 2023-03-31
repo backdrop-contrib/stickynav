@@ -18,5 +18,7 @@
         "administrator": 0
     },
     "stickynav-offset-selector-seven": "",
-    "stickynav-custom-offset-seven": ""
+    "stickynav-custom-offset-seven": "",
+    "paths": "",
+    "pathvisibility": null
 }
